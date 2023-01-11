@@ -45,23 +45,6 @@ class AuthController extends Controller
         return TokenController::respondWithToken($token);
     }
 
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
-    public function refresh()
-    {
-        return response()->json([
-            'status' => 'success',
-            'user' => Auth::user(),
-            'authorization' => [
-                'token' => Auth::refresh(),
-                'type' => 'bearer',
-            ]
-        ]);
-    }
-
     public function logout()
     {
         Auth::logout();

@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Music;
+use App\Models\Artist;
 use Illuminate\Http\Request;
 
-class MusicController extends Controller
+class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function allMusic()
+    public function allArtist()
     {
-        $musics = Music::all();
+        $artists = Artist::all();
         return response()->json([
             'status' => 'success',
-            'music' => $musics
+            'artists' => $artists
         ]);
     }
 
@@ -26,25 +26,23 @@ class MusicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addMusic(Request $request)
+    public function addArtist(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'path' => 'required|string|max:255',
+            'bio' => 'required|string|max:255',
             'image' => 'required|string|max:255',
-            'artist_id' => 'integer',
         ]);
 
-        $music = Music::create([
+        $artist = Artist::create([
             'name' => $request->name,
-            'path' => $request->path,
+            'bio' => $request->bio,
             'image' => $request->image,
-            'artist_id' => $request->artist_id,
         ]);
 
         return response()->json([
             'status' => 'success',
-            'music' => $music
+            'artist' => $artist
         ]);
     }
 
@@ -54,48 +52,46 @@ class MusicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function editMusic(Request $request, $id)
+    public function editArtist(Request $request, $id)
     {
-        $music = Music::findOrFail($id);
+        $artist = Artist::findOrFail($id);
 
-        $music->update([
+        $artist->update([
             'name' => $request->name,
-            'path' => $request->path,
-            'image' => $request->image,
-            'artist_id' => $request->artist_id,
+            'bio' => $request->bio,
+            'image' => $request->image
         ]);
 
         return response()->json([
             'status' => 'success',
-            'music' => $music
+            'artist' => $artist
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Music  $music
+     * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function showMusic($id)
+    public function showArtist($id)
     {
-        $music = Music::findOrFail($id);
+        $artist = Artist::findOrFail($id);
 
         return response()->json([
             'status' => 'success',
-            'music' => $music
+            'artist' => $artist
         ]);
     }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Music  $music
+     * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function deleteMusic($id)
+    public function deleteArtist($id)
     {
-        Music::findOrFail($id)->delete();
+        Artist::findOrFail($id)->delete();
 
         return response()->json([
             'status' => 'success',
