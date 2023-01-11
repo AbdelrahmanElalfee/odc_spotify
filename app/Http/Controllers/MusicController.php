@@ -102,4 +102,14 @@ class MusicController extends Controller
             'msg' => 'Deleted Successfully'
         ]);
     }
+
+    public function artistMusic($id)
+    {
+        $musics = Music::select()->where('artist_id', '=', $id)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'music' => $musics
+        ]);
+    }
 }

@@ -40,6 +40,7 @@ Route::group([
     Route::post('edit/{id}', [MusicController::class, 'editMusic']);
     Route::get('{id}', [MusicController::class, 'showMusic']);
     Route::delete('delete/{id}', [MusicController::class, 'deleteMusic']);
+    Route::get('artist/{id}', [MusicController::class, 'artistMusic']);
 });
 Route::group([
     'prefix' => 'artist'
