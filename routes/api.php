@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MusicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,11 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
 });
+
+Route::post('add/music', [MusicController::class, 'addMusic']);
+
+Route::post('edit/music/{$id}', [MusicController::class, 'editMusic']);
+
+Route::get('musics', [MusicController::class, 'allMusic']);
+Route::get('music/{$id}', [MusicController::class, 'showMusic']);
+Route::get('delete/music/{$id}', [MusicController::class, 'deleteMusic']);
